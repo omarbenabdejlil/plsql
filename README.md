@@ -16,60 +16,60 @@
 1)
 ```sql
 select count(*)
-  2  from client
-  3  ;
+    from client
+    ;
 select ville, count(*)
-  2  from client
-  3  group by ville;
+    from client
+   group by ville;
 ```
 
 2)
 ```sql
 
 select SUM(QteV*prixV)
-  2  from vente, Produit
-  3  where Vente.NP=Produit.NP;
+    from vente, Produit
+    where Vente.NP=Produit.NP;
 ```
 3)
 
 ```sql
 select SUM(QteV*prixV)
-  2  from Vente natural join Produit
-  3  GROUP BY NM;
+    from Vente natural join Produit
+    GROUP BY NM;
 
 2éme methode
 select SUM(QteV*prixV) CA , NM
-  2  from Vente join Produit on Vente.NP=Produit.NP
-  3  GROUP BY NM;
+    from Vente join Produit on Vente.NP=Produit.NP
+    GROUP BY NM;
 ```
 4) 
 ```sql
 select  NM , Nclt , SUM(QteV*prixV) CA
-  2    from Vente, Produit
-  3  where Vente.NP=Produit.NP
-  4  and dateV between '01/01/2020' and '31/12/2020'
-  5  group by  NM,Nclt;
+      from Vente, Produit
+    where Vente.NP=Produit.NP
+    and dateV between '01/01/2020' and '31/12/2020'
+    group by  NM,Nclt;
 
 2éme méthode :
 select  NM , Nclt , SUM(QteV*prixV) CA
-  2    from Vente, Produit
-  3  where Vente.NP=Produit.NP
-  4  and dateV > '01/01/2020' and  dateV <'31/12/2020'
-  5  group by  NM,Nclt;
+      from Vente, Produit
+    where Vente.NP=Produit.NP
+    and dateV > '01/01/2020' and  dateV <'31/12/2020'
+    group by  NM,Nclt;
   
 3éme methode :
 select  NM , Nclt , SUM(QteV*prixV) CA
-  2    from Vente, Produit
-  3  where Vente.NP=Produit.NP
-  4  and extract (year from dateV) = '2020'
-  5  group by  NM,Nclt;
+      from Vente, Produit
+    where Vente.NP=Produit.NP
+    and extract (year from dateV) = '2020'
+    group by  NM,Nclt;
  
 #4éme methode xD : 
 select  NM , Nclt , SUM(QteV*prixV) CA
-  2    from Vente, Produit
-  3  where Vente.NP=Produit.NP
-  4  and TO_CHAR(dateV,'yyyy')='2020'
-  5  group by  NM,Nclt;
+      from Vente, Produit
+    where Vente.NP=Produit.NP
+    and TO_CHAR(dateV,'yyyy')='2020'
+    group by  NM,Nclt;
 ```
 
 5)
