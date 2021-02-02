@@ -188,7 +188,25 @@ declare cursor  c is
    end loop;
    end;
       /
-```     
+``` 
+- Exercice 3 : 
+> Ecrire une fonction __Cal_Chiff_Prod__ (IdClt In Numbre, Idp In Number) qui calcule le chiffre d’affaires d’un client donné pour un produit donné. 
+Ce chiffre d’affaires est la somme des Qtev *Pu  du produit donné. 
+> La Procédure développé sera appelée par un programme PL/SQL qui affiche  tous les clients de la  base . Pour chaque client, le programme doit afficher le chiffre d’affaire de chaque produit ainsi que le chiffre d’affaire globale de ce client.
+> Le résultat retourné par le programme est des tuples (CodeCLt, IdArt, DesArt, ChiffAff).
+```sql
+create  OR REPLACE  function Calc_Chiff_Prod ( IDclt vente.Nclt%type , IDprod vente.np%type ) RETURN NUMBER IS 
+
+CA NUMBER;
+
+BEGIN 
+select SUM(QteV*prixV) into CA
+from vente  join produit on vente.np = produit.np
+where vente.Nclt=IDclt and vente.np=IDprod;
+return CA;
+END;
+/
+```
 <hr>
 
 # Partie Trigger :
