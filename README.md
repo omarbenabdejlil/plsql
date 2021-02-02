@@ -189,3 +189,69 @@ declare cursor  c is
    end;
       /
 ```     
+<hr>
+
+# Partie Trigger :
+> 1/Créer  un déclencheur  qui affiche le numéro et le nom du magasin que l'on veut supprimer de la table Magasin : 
+```sql
+create or replace trigger TventeSupprime 
+before delete 
+on magasin 
+for each row 
+
+BEGIN
+DBMS_output.put_line('suppression du magasin num ' || :OLD.NM || 'nom mag  ' || :old.GERANT  );
+END; 
+/
+```
+> 2/ Créer un trigger TventeSupprime qui permet de stocker toutes les ventes supprimée dans la table VenteSupprime , cette table est de même structure que la table Vente : 
+```sql 
+create or replace trigger TsuppVente
+before delete on vente
+for each row 
+
+BEGIN
+insert into vente_supp values( :old.NM , :old.np , :old.nclt , :old.DateV , :old.QteV , SYSDate );
+END; 
+/
+```
+> 3/ Ecrire un trigger qui utilise une séquence pour générer automatiquement  le numéro de  magasin  lors d’insertion d’un nouveau magasin : 
+```sql
+create or replace trigger insertautmagasin
+before insert on magasin 
+for each row 
+
+BEGIN
+select seqMag.nextval into :new.NM from Dual; 
+END;
+/
+```
+> 4/ Par mesure de sécurité on veut enregistrer dans une table TABLE_AUDIT  quel utilisateur a créé ou  a supprimé des lignes dans la table Magasin, avec la date de l'action, le type de l'action (ajout ou suppression) et le numéro de magasin concerné : 
+- Voila la TABLE_AUDIT :  
+```sql
+Création de la table table_audit :
+create table table_audit
+(numero integer constraint  pk_audit primary key,
+utilisateur varchar(30) not null,
+date_modif date not null,
+nm varchar (15) not null,
+action varchar(15) not null);
+```
+- On creer le Trigger : 
+```sql
+create OR REPLACE trigger TmagSupp
+after insert or delete 
+on magasin
+for each row 
+
+BEGIN 
+
+if inserting  then 
+insert into table_audit values ( seqTableAudit.nextVal , user , sysDate, :new.NM, 'insertion');
+end if;
+if deleting then 
+insert into table_audit values ( seqTableAudit.nextVal , user , sysDate, :old.NM, 'insertion');
+end if;
+END;
+/
+```
