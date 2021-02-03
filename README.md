@@ -4,14 +4,14 @@
   <div style="align : center;"> <img src="https://img.icons8.com/plasticine/452/oracle-pl-sql--v3.png" class="center"></div>
 </center>
 
-## Télecharger les instructions de création des tables ici : ![Lien!](https://iset.uvt.tn/mod/resource/view.php?id=426236) 
+## Télecharger les instructions de création des tables ici : https://iset.uvt.tn/mod/resource/view.php?id=426236
 
 
-## Résumé PLSQL :  ![Lien!](https://iset.uvt.tn/mod/resource/view.php?id=454040) 
+## Résumé PLSQL :  https://iset.uvt.tn/mod/resource/view.php?id=454040
 
 <hr>
 
-### Correction de l'exercice numero 1  : ![Lien!](https://ibb.co/r69ky1z)
+### Correction de l'exercice numero 1  : ![Lien]:(https://ibb.co/r69ky1z)
 
 1)
 ```sql
