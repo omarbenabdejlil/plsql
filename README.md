@@ -11,7 +11,7 @@
 
 <hr>
 
-### Correction de l'exercice numero 1  : ![Lien]:(https://ibb.co/r69ky1z)
+### Correction de l'exercice numero 1  : https://ibb.co/r69ky1z
 
 1)
 ```sql
